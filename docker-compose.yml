@@ -1,0 +1,54 @@
+# Список наших сервисов (контейнеров)
+version: "3.5"
+
+services:
+    # Apache + PHP
+    www:
+        build:
+            context: .docker/images/php
+        restart: unless-stopped
+        ports:
+            - 80:80
+        networks:
+            - dockernet
+        volumes:
+            # Рабочая директория
+            - ./:/var/www/html
+            # Конфиги
+            - .docker/conf/apache2.conf:/etc/apache2/apache2.conf
+            - .docker/conf/php.ini:/usr/local/etc/php/php.ini
+            - ./.docker/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+            # Логи
+            - .docker/logs:/var/log/apache2
+
+    # База данных
+#    db:
+#        image: mariadb
+#        restart: unless-stopped
+#        ports:
+#            - "3306:3306"
+#        networks:
+#            - dockernet
+#        volumes:
+#            - .docker/database:/var/lib/mysql
+#        # задаем пароль для root пользователя
+#        environment:
+#            MYSQL_DATABASE: dev_db
+#            MYSQL_ROOT_PASSWORD: secret
+#            MYSQL_USER: dev_user
+#            MYSQL_PASSWORD: devpass
+#    # Админер
+#    adminer:
+#        image: adminer
+#        restart: unless-stopped
+#        networks:
+#            - dockernet
+#        ports:
+#            - 8080:8080
+#        depends_on:
+#            - db
+
+# Сеть между контейнерами
+networks:
+    dockernet:
+        driver: bridge
