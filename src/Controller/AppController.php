@@ -1,18 +1,17 @@
 <?php
 namespace App\Controller;
 
+use App\Service\FileInfo;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 class AppController extends AbstractController
 {
-    public function index(): Response
+    public function index(FileInfo $files): Response
     {
-        $number = 'XXX';
-
-        return $this->render('base.html.twig', [
-            'number' => $number,
+        return $this->render('list.twig', [
+            'title' => 'List',
+            'fileMetadata' => $files->getList()
         ]);
     }
-
 }
