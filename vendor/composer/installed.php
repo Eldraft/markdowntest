@@ -85,6 +85,15 @@
                 0 => '1.0',
             ),
         ),
+        'symfony/asset' => array(
+            'pretty_version' => 'v5.2.12',
+            'version' => '5.2.12.0',
+            'reference' => 'abe64fee9fa2978c730c84d0d6df760f2d9ddba0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/asset',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'symfony/cache' => array(
             'pretty_version' => 'v5.2.4',
             'version' => '5.2.4.0',
