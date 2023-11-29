@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "* * * * * $(which php) /var/www/html/cron.php > /dev/null 2>&1" | crontab -u www-data -
+chown -R www-data:www-data /var/www/html/
+chmod -R 755 /var/www/html/
 
-/etc/init.d/cron start
+$(which php) /var/www/html/start.php
+
 apache2-foreground

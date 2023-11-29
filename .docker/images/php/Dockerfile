@@ -18,7 +18,6 @@ RUN apt-get install -fyqq \
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 RUN install-php-extensions gd opcache zip
-# zip imap intl ldap mysqli
 
 # ====================================
 # Меняем корневую директорию Apache заменой файла Virtual Host
@@ -36,7 +35,7 @@ RUN pecl install xdebug-3.0.0 \
  && docker-php-ext-enable xdebug
 
 # ====================================
-# Запускаем CRON
+# Запускаем стартовые скрипты
 # ====================================
 
 COPY start.sh /root/start.sh
@@ -44,5 +43,3 @@ COPY start.sh /root/start.sh
 RUN sed -i -e 's/\r$//' /root/start.sh
 CMD ["/root/start.sh"]
 
-# Указываем рабочую директорию (необязательно?)
-#WORKDIR /www/html
