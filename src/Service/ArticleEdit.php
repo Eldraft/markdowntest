@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class FileEdit
+class ArticleEdit
 {
     public $fileInfo;
 

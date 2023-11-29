@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Service\ArticleSave;
-use App\Service\FileEdit;
+use App\Service\ArticleEdit;
 use App\Service\FileInfo;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class AppController extends AbstractController
         ]);
     }
 
-    public function edit(FileEdit $editAction, string $id): Response
+    public function edit(ArticleEdit $editAction, string $id): Response
     {
         return $this->render('edit.twig', [
             'title' => 'Edit',
