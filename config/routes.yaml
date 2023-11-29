@@ -1,4 +1,7 @@
 index:
     path: /
     controller: App\Controller\AppController::index
+edit:
+    path: /edit/{id}
+    controller: App\Controller\AppController::edit
 

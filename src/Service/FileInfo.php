@@ -38,7 +38,7 @@ class FileInfo
     {
         $result = array();
         $string = file_get_contents($file);
-        $stingBlocks = explode("---", $string);
+        $stingBlocks = preg_split("/\-\-\-\s/", $string);
 
         if (empty($stingBlocks[1])){
             return $result;
@@ -51,6 +51,43 @@ class FileInfo
             $key = trim(substr_replace($meta, '', $position), " \n\r\t\v\x00\"\:");
             $value = trim(substr($meta, $position), " \n\r\t\v\x00\"\:");
             $result[$key] = $value;
+        }
+        return $result;
+    }
+
+    public function getFileContent($file)
+    {
+        $string = file_get_contents($file);
+        $stingBlocks = preg_split("/\-\-\-\s/", $string);
+
+        if (empty($stingBlocks[2])){
+            return '';
+        }
+
+        return trim($stingBlocks[2]);
+    }
+
+    public function countImages($string): int
+    {
+        $result = 0;
+        $pattern = '/!\[[^\n]*\]\([^\n]*\)/';
+        preg_match_all($pattern, $string, $matches);
+
+        if (!empty($matches)) {
+            $result = count($matches[0]);
+        }
+        return $result;
+
+    }
+
+    public function countTables($string): int
+    {
+        $result = 0;
+        $pattern = '/(^|\s)\|-[|\-]*\|\s/';
+        preg_match_all($pattern, $string, $matches);
+
+        if (!empty($matches)) {
+            $result = count($matches[0]);
         }
         return $result;
     }

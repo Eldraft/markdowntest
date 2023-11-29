@@ -1,4 +1,4 @@
 
 function editView(id){
-    alert(id);
+    window.location.replace("/edit/" + id);
 }
