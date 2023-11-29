@@ -21,10 +21,12 @@ class ArticleEdit
         $metadata = $this->fileInfo->getFileMetadata($file);
         $content = $this->fileInfo->getFileContent($file);
 
+        $krl = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя';
+
         $result['id'] = $id;
         $result['title'] = $metadata['title'];
         $result['content'] = $content;
-        $result['words'] = str_word_count($content);
+        $result['words'] = str_word_count($content, 0, $krl);
         $result['tables'] = $this->fileInfo->countTables($content);
         $result['images'] = $this->fileInfo->countImages($content);
 

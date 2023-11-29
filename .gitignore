@@ -5,6 +5,8 @@
 .idea/
 .phpstorm.meta.php
 
+*.log
+
 
 ###> symfony/framework-bundle ###
 /.env.local

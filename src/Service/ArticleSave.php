@@ -24,13 +24,20 @@ class ArticleSave
         );
 
         $this->setStatistic();
-        return $this->saveFile();
+        $result = $this->saveFile();
+        if ($result){
+            $this->logToFile();
+        }
+
+        return $result;
     }
 
     private function setStatistic()
     {
+        $krl = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя';
+
         $this->statistic = array(
-            'words'  => str_word_count($this->articleData['content']) - $this->articleData['words'],
+            'words'  => str_word_count($this->articleData['content'], 0, $krl) - $this->articleData['words'],
             'tables' => $this->fileInfo->countTables($this->articleData['content']) - $this->articleData['tables'],
             'images' => $this->fileInfo->countImages($this->articleData['content']) - $this->articleData['images'],
             );
@@ -51,6 +58,15 @@ class ArticleSave
         } catch (\Exception $e){
             return false;
         }
+    }
+
+    private function logToFile(){
+
+        $rootDir = dirname(getcwd());
+        $file = $rootDir . '/audit.log';
+        $msg = "------ ПРАВКА -------\n";
+        file_put_contents($file, $msg, FILE_APPEND);
+        file_put_contents($file, print_r($this->statistic, true), FILE_APPEND);
     }
 
 }
