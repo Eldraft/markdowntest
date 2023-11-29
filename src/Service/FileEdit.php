@@ -25,6 +25,7 @@ class FileEdit
         $metadata = $this->fileInfo->getFileMetadata($file);
         $content = $this->fileInfo->getFileContent($file);
 
+        $result['id'] = $id;
         $result['title'] = $metadata['title'];
         $result['content'] = $content;
         $result['words'] = str_word_count($content);

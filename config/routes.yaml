@@ -5,3 +5,6 @@ edit:
     path: /edit/{id}
     controller: App\Controller\AppController::edit
 
+save:
+    path: /save
+    controller: App\Controller\AppController::save

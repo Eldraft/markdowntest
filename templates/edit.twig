@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <form name="content" method="post" action="/save">
+        <input type="hidden" name="id" value="{{ data.id }}">
         <input type="hidden" name="words" value="{{ data.words }}">
         <input type="hidden" name="tables" value="{{ data.tables }}">
         <input type="hidden" name="images" value="{{ data.images }}">
         <div class="mb-3">
-            <label class="mb-1" for="comment">{{ data.title }}</label>
-            <textarea class="form-control" rows="5" id="comment" name="text">{{ data.content }}</textarea>
+            <label class="mb-1" for="content">{{ data.title }}</label>
+            <textarea class="form-control" rows="5" id="content" name="content">{{ data.content }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

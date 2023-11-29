@@ -11,8 +11,11 @@ class FileInfo
         $metadata = array();
         foreach ($files as $name => $file){
             $data = $this->getFileMetadata($file);
-            $data['id'] = $name;
-            $metadata[$name] = $data;
+
+            if (!empty($data)){
+                $data['id'] = $name;
+                $metadata[$name] = $data;
+            }
         }
 
         return $metadata;
@@ -34,17 +37,28 @@ class FileInfo
         return $files;
     }
 
-    public function getFileMetadata($file): array
+    public function getMetadataBlock($file): string
     {
-        $result = array();
+        $result = '';
         $string = file_get_contents($file);
         $stingBlocks = preg_split("/\-\-\-\s/", $string);
 
-        if (empty($stingBlocks[1])){
+        if (!empty($stingBlocks[1])){
+            $result = $stingBlocks[1];
+        }
+
+        return $result;
+    }
+
+    public function getFileMetadata($file): array
+    {
+        $result = array();
+
+        if (empty($metaBlock = $this->getMetadataBlock($file))){
             return $result;
         }
 
-        $metaStrings = explode(PHP_EOL, trim($stingBlocks[1]));
+        $metaStrings = explode(PHP_EOL, trim($metaBlock));
 
         foreach ($metaStrings as $meta){
             $position = strpos($meta, ':');
@@ -55,7 +69,7 @@ class FileInfo
         return $result;
     }
 
-    public function getFileContent($file)
+    public function getFileContent($file): string
     {
         $string = file_get_contents($file);
         $stingBlocks = preg_split("/\-\-\-\s/", $string);
