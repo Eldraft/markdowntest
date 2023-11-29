@@ -7,7 +7,7 @@ class FileInfo
     public function getPath(): string
     {
         $rootDir = dirname(getcwd());
-        $folder = '/icecream/articles/';
+        $folder = '/taskFiles/articles/';
 
         return $rootDir . $folder;
     }
