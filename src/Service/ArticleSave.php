@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-
 class ArticleSave
 {
     public $fileInfo;
@@ -15,8 +13,8 @@ class ArticleSave
         $this->fileInfo = $fileInfo;
     }
 
-    public function saveHandler($request){
-
+    public function saveHandler($request): bool
+    {
         $this->articleData = array(
             'id'      => $request->get('id'),
             'words'   => $request->get('words'),

@@ -1,20 +1,20 @@
 <?php
 namespace App\Controller;
 
+use App\Service\ArticleList;
 use App\Service\ArticleSave;
 use App\Service\ArticleEdit;
-use App\Service\FileInfo;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class AppController extends AbstractController
 {
-    public function index(FileInfo $files): Response
+    public function index(ArticleList $listAction): Response
     {
         return $this->render('list.twig', [
             'title' => 'List',
-            'fileMetadata' => $files->getList()
+            'fileMetadata' => $listAction->getData()
         ]);
     }
 
