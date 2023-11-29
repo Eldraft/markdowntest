@@ -38,10 +38,8 @@ class ArticleSave
 
     private function saveFile(): bool
     {
-        $rootDir = dirname(getcwd());
-        $ds = DIRECTORY_SEPARATOR;
-        $folder = 'icecream/articles';
-        $file = $rootDir . $ds . $folder . $ds. $this->articleData['id'];
+        $path = $this->fileInfo->getPath();
+        $file = $path . $this->articleData['id'];
 
         $metadata  = '---' . "\r";
         $metadata .= $this->fileInfo->getMetadataBlock($file);

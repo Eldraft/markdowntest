@@ -4,16 +4,21 @@ namespace App\Service;
 
 class FileInfo
 {
-    public function getFilesPath($folder, $ext): array
+    public function getPath(): string
     {
-
         $rootDir = dirname(getcwd());
-        $ds = DIRECTORY_SEPARATOR;
+        $folder = '/icecream/articles/';
 
-        $path = $rootDir . $ds . $folder;
+        return $rootDir . $folder;
+    }
+
+
+    public function getFilesPath($ext): array
+    {
+        $path = $this->getPath();
 
         $files = array();
-        foreach(glob($path . "$ds*.$ext") as $file) {
+        foreach(glob($path . "*.$ext") as $file) {
             $files[basename($file)] = $file;
         }
 

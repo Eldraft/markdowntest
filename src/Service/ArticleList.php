@@ -14,7 +14,7 @@ class ArticleList
     public function getData(): array
     {
 
-        $files = $this->fileInfo->getFilesPath('icecream/articles', 'md');
+        $files = $this->fileInfo->getFilesPath('md');
 
         $metadata = array();
         foreach ($files as $name => $file){

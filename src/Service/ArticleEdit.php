@@ -13,14 +13,10 @@ class ArticleEdit
 
     public function getData($id): array
     {
-
         $result = array();
 
-        $rootDir = dirname(getcwd());
-        $ds = DIRECTORY_SEPARATOR;
-        $folder = 'icecream/articles';
-
-        $file = $rootDir . $ds . $folder . $ds. $id;
+        $path = $this->fileInfo->getPath();
+        $file = $path . $id;
 
         $metadata = $this->fileInfo->getFileMetadata($file);
         $content = $this->fileInfo->getFileContent($file);
