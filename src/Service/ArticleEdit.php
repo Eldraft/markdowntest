@@ -4,13 +4,20 @@ namespace App\Service;
 
 class ArticleEdit
 {
-    public $fileInfo;
+    private $fileInfo;
 
     public function __construct(FileInfo $fileInfo)
     {
         $this->fileInfo = $fileInfo;
     }
 
+    /**
+     * Подготовка данных для формы редактирования
+     * $krl - фикс подсчета слов на кириллице
+     * @author eldraft
+     * @param $id
+     * @return array
+     */
     public function getData($id): array
     {
         $result = array();

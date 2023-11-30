@@ -4,13 +4,18 @@ namespace App\Service;
 
 class ArticleList
 {
-    public $fileInfo;
+    private $fileInfo;
 
     public function __construct(FileInfo $fileInfo)
     {
         $this->fileInfo = $fileInfo;
     }
 
+    /**
+     * Сбор данных для списка
+     * @author eldraft
+     * @return array
+     */
     public function getData(): array
     {
 

@@ -4,6 +4,11 @@ namespace App\Service;
 
 class FileInfo
 {
+    /**
+     * Определение рабочего каталога
+     * @author eldraft
+     * @return string
+     */
     public function getPath(): string
     {
         $rootDir = dirname(getcwd());
@@ -13,6 +18,12 @@ class FileInfo
     }
 
 
+    /**
+     * Сбор полных путей всех файлов с указанным расширением из рабочего каталога
+     * @author eldraft
+     * @param $ext
+     * @return array
+     */
     public function getFilesPath($ext): array
     {
         $path = $this->getPath();
@@ -25,6 +36,12 @@ class FileInfo
         return $files;
     }
 
+    /**
+     * Получение блока метадаты файла
+     * @author eldraft
+     * @param $file
+     * @return string
+     */
     public function getMetadataBlock($file): string
     {
         $result = '';
@@ -38,6 +55,12 @@ class FileInfo
         return $result;
     }
 
+    /**
+     * Парсинг метадаты в массив
+     * @author eldraft
+     * @param $file
+     * @return array
+     */
     public function getFileMetadata($file): array
     {
         $result = array();
@@ -57,6 +80,12 @@ class FileInfo
         return $result;
     }
 
+    /**
+     * Парсинг контента
+     * @author eldraft
+     * @param $file
+     * @return string
+     */
     public function getFileContent($file): string
     {
         $string = file_get_contents($file);
@@ -69,6 +98,12 @@ class FileInfo
         return trim($stingBlocks[2]);
     }
 
+    /**
+     * Подсчет всех картинок в файле
+     * @author eldraft
+     * @param $string
+     * @return int
+     */
     public function countImages($string): int
     {
         $result = 0;
@@ -82,6 +117,12 @@ class FileInfo
 
     }
 
+    /**
+     * Подсчет всех таблиц в файле
+     * @author eldraft
+     * @param $string
+     * @return int
+     */
     public function countTables($string): int
     {
         $result = 0;

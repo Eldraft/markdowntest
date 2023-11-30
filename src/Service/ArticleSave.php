@@ -4,7 +4,7 @@ namespace App\Service;
 
 class ArticleSave
 {
-    public $fileInfo;
+    private $fileInfo;
     private $articleData;
     private $statistic;
 
@@ -13,6 +13,12 @@ class ArticleSave
         $this->fileInfo = $fileInfo;
     }
 
+    /**
+     * Сохранение и в случае успеха - запись в лог статистики
+     * @author eldraft
+     * @param $request
+     * @return bool
+     */
     public function saveHandler($request): bool
     {
         $this->articleData = array(
@@ -32,6 +38,12 @@ class ArticleSave
         return $result;
     }
 
+    /**
+     * Сбор статистики
+     * $krl - фикс подсчета слов на кириллице
+     * @author eldraft
+     * @return void
+     */
     private function setStatistic()
     {
         $krl = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя';
@@ -43,6 +55,11 @@ class ArticleSave
             );
     }
 
+    /**
+     * Запись контента в файл
+     * @author eldraft
+     * @return bool
+     */
     private function saveFile(): bool
     {
         $path = $this->fileInfo->getPath();
@@ -60,6 +77,10 @@ class ArticleSave
         }
     }
 
+    /**
+     * Запись в лог
+     * @return void
+     */
     private function logToFile(){
 
         $rootDir = dirname(getcwd());
